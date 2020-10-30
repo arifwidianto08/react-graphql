@@ -6,21 +6,27 @@ import { Form } from "grommet/components/Form";
 import { FormField } from "grommet/components/FormField";
 import { Button } from "grommet/components/Button";
 import { Box } from "grommet/components/Box";
-import { GET_AUTHORS, ADD_BOOK } from "../queries";
+import { GET_AUTHORS, ADD_BOOK, GET_BOOKS } from "../queries";
 
 export default function AddBook() {
   const { loading, error, data = { authors: [] } } = useQuery(GET_AUTHORS);
-
-  const [addBook] = useMutation(ADD_BOOK, {
-    onCompleted(data) {
-      console.log("data ? : ", data);
-    },
-  });
 
   const [newBook, setBook] = useState({
     name: "",
     genre: "",
     authorId: "",
+  });
+
+  const [addBook] = useMutation(ADD_BOOK, {
+    onCompleted(data) {
+      setBook({
+        name: "",
+        genre: "",
+        authorId: "",
+      });
+    },
+    // Refetching List Books after add a new book
+    refetchQueries: [{ query: GET_BOOKS }],
   });
 
   if (loading) return <div>Loading...</div>;
