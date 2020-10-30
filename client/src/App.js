@@ -1,25 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import AddBook from "./components/AddBook";
+import BookList from "./containers/BookList";
+import { Grommet } from "grommet";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet plain>
+      <div id="main">
+        <h1>My Reading List</h1>
+        <BookList />
+        <AddBook />
+      </div>
+    </Grommet>
   );
 }
 
